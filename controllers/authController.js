@@ -11,7 +11,6 @@ exports.login = async (req, res) => {
     return res.status(400).json({ message: "User not found" });
   }
 
-  // 🔥 FIX HERE
 console.log("Entered password:", password);
 console.log("Stored password:", user.password);
 
@@ -25,7 +24,7 @@ console.log("Match result:", isMatch);
 
   const token = jwt.sign(
     { id: user._id, role: user.role },
-    "secretkey",
+    process.env.JWT_SECRET,
     { expiresIn: "1d" }
   );
   res.json({ token });
